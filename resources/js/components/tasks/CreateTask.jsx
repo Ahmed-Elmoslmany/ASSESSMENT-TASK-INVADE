@@ -56,7 +56,7 @@ const CreateTask = () => {
 
     return (
         <div className="p-6">
-            {/* Button to open the modal */}
+            
             <button
                 onClick={openModal}
                 className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors transform hover:scale-105 mb-6"
@@ -64,7 +64,6 @@ const CreateTask = () => {
                 Create Task
             </button>
 
-            {/* Modal to create a task */}
             {modalOpen && (
                 <Modal 
                     taskData={taskData}

@@ -13,9 +13,18 @@ class TaskController extends Controller
 {
     public function __construct(protected TaskService $taskService){}
 
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = auth()->user()->tasks()->latest()->with('category')->paginate(10);
+        $status = $request->query('status');
+
+        $tasksQuery = auth()->user()->tasks()->latest()->with('category');
+
+        if ($status) {
+            $tasksQuery->where('status', $status);
+        }
+
+        $tasks = $tasksQuery->paginate(10);
+        
         return TaskResource::collection($tasks);
     }
 

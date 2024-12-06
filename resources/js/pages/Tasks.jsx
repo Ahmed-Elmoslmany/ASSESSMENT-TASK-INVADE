@@ -4,30 +4,34 @@ import CreateTask from "../components/tasks/CreateTask";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from "axios";
+import {  ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 const Tasks = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [tasks, setTasks] = useState([]);
+    const [links, setLinks] = useState([]);
+    const [url, setUrl] = useState('http://localhost:8000/api/tasks');
 
     const navigate = useNavigate();
 
     useEffect(() => {
         try {
-            axios.get('http://localhost:8000/api/tasks',{
+            axios.get(url, {
 
                 'headers': {
-                'Authorization': 'Bearer ' + localStorage.getItem('authToken'),
-                'Content-Type': 'application/json',
-            },
+                    'Authorization': 'Bearer ' + localStorage.getItem('authToken'),
+                    'Content-Type': 'application/json',
+                },
 
 
             }).then(res => {
                 setTasks(res.data.data);
+                setLinks(res.data.links);
             })
             console.log(tasks);
         } catch (e) {
             console.log(e);
         }
-    },[])
+    }, [url])
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
@@ -39,6 +43,14 @@ const Tasks = () => {
             navigate('/login');
         }
     }, [navigate]);
+
+    const handelNextPage = () => {
+        if (links.next) setUrl(links.next);
+    }
+
+    const handelPreviousPage = () => {
+        if (links.prev) setUrl(links.prev);
+    }
 
     if (!isAuthenticated) {
         return (
@@ -62,12 +74,39 @@ const Tasks = () => {
         <>
             <div className="container mx-auto px-4 py-6 max-w-full text-center mt-10 mb-10">
 
-            <h1>Tasks</h1>
-            
-            <CreateTask />
-            <TaskList tasks={tasks} />
+                <h1>Tasks</h1>
+
+                <div className="flex justify-between items-center">
+                    {links.prev ? (
+                        <button
+                            onClick={handelPreviousPage}
+                            className="flex justify-center px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors transform hover:scale-105 mb-6"
+                        >
+                            <ArrowLeftIcon className="h-5 w-5 mr-2 mt-0.5" />
+                            Previous
+                        </button>
+                    ) : (
+                        <div className="w-[100px]"></div>
+                    )}
+
+                    {links.next ? (
+                        <button
+                            onClick={handelNextPage}
+                            className="flex justify-center px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors transform hover:scale-105 mb-6"
+                        >
+                            Next
+                            <ArrowRightIcon className="h-5 w-5 ml-2 mt-0.5" />
+                        </button>
+                    ) : (
+                        <div className="w-[100px]"></div>
+                    )}
+                </div>
+
+
+                <CreateTask />
+                <TaskList tasks={tasks} />
             </div>
-           
+
         </>
     )
 }
