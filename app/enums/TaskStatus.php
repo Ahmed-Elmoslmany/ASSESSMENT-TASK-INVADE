@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\enums;
 
 enum TaskStatus : string
 {
-    case COMPLETED = 'Completed';
-    case PENDING = 'Pending';
+    case COMPLETED = 'completed';
+    case PENDING = 'pending';
 
     public function getColor(): string
     {

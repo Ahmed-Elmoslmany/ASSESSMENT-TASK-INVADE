@@ -23,7 +23,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'fail',
                 'message' => 'This email is already taken, Try another one'
-            ]);
+            ], 422);
         }
 
         $user = User::create([
@@ -36,7 +36,7 @@ class AuthController extends Controller
             'status' => 'success',
             'message' => 'register successfully',
             'token' => $user->createToken('API Token')->plainTextToken
-        ]);
+        ], 201);
     }
 
     public function login(Request $request)
@@ -52,13 +52,13 @@ class AuthController extends Controller
              return response()->json([
                 'status' => 'fail',
                 'message' => 'Invalid credentials'
-            ]);
+            ], 401);
         }
 
         return response()->json([
             'status' => 'success',
             'message' => 'login successfully',
             'token' => $user->createToken('API Token')->plainTextToken
-        ]);
+        ], 200);
     }
 }
