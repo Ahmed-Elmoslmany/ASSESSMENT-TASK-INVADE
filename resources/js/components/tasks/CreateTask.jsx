@@ -7,7 +7,7 @@ const CreateTask = () => {
         title: '',
         description: '',
         status: '',
-        category: '',
+        category_id: '',
         due_date: '',
     });
 
@@ -16,7 +16,7 @@ const CreateTask = () => {
             title: '',
             description: '',
             status: '',
-            category: '',
+            category_id: 1,
             due_date: '',
         });
         setModalOpen(true);
@@ -36,6 +36,7 @@ const CreateTask = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(taskData);
         try{
             await axios.post('http://localhost:8000/api/tasks', taskData, {
                 'headers': {
@@ -43,6 +44,7 @@ const CreateTask = () => {
                     'Content-Type': 'application/json',
                 }
             });
+            alert('Task created successfully!');
         } catch (error) {
             alert('Error creating task');
             
