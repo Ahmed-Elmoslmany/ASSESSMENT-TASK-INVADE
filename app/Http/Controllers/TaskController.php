@@ -15,7 +15,7 @@ class TaskController extends Controller
 
     public function index()
     {
-        $tasks = auth()->user()->tasks()->with('category')->paginate(10);
+        $tasks = auth()->user()->tasks()->latest()->with('category')->paginate(10);
         return TaskResource::collection($tasks);
     }
 

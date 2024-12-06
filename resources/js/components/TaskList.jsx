@@ -8,20 +8,32 @@ const TaskList = ({ tasks, setTasks }) => {
         title: '',
         description: '',
         status: '',
-        category: '',
+        category_id: null,
         due_date: '',
     });
 
     const openModal = (task) => {
+        
         setSelectedTask(task);
         setTaskData({
             title: task.title,
             description: task.description,
             status: task.status,
-            category: task.category,
+            category_id: mapCategoryToId(task.category),
             due_date: task.due_date,
         });
         setModalOpen(true);
+    };
+
+    const mapCategoryToId = (category) => {
+        switch (category) {
+            case 'Personal':
+                return 1;
+            case 'Work':
+                return 2;
+            case 'Urgent':
+                return 3;
+        }
     };
 
     const closeModal = () => {
@@ -38,6 +50,7 @@ const TaskList = ({ tasks, setTasks }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(taskData);
         try {
             await axios.patch(`http://localhost:8000/api/tasks/${selectedTask.id}`, taskData, {
                 'headers': {
@@ -70,36 +83,36 @@ const TaskList = ({ tasks, setTasks }) => {
 
     return (
         <div className="p-6">
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {tasks.map((task) => (
-            <div
-                key={task.id}
-                className={`bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-4 ${task.status === 'completed' ? 'border-green-500' : 'border-blue-500'}`}
-            >
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 hover:text-blue-600 transition-colors mb-3">{task.title}</h3>
-                <p className="text-gray-600 text-base sm:text-lg leading-relaxed">{task.description}</p>
-                <div className="mt-4 text-sm text-gray-600 space-y-2">
-                    <p>Category: <span className="font-semibold text-gray-800">{task.category}</span></p>
-                    <p>Due Date: <span className="font-semibold text-gray-800">{task.due_date}</span></p>
-                    <p>Status: <span className="font-semibold text-gray-800">{task.status}</span></p>
-                </div>
-                <div className="flex flex-wrap justify-between mt-4 space-x-3 space-y-2 sm:space-y-0">
-                    <button
-                        onClick={() => openModal(task)}
-                        className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors transform hover:scale-105 w-full sm:w-auto"
-                    >
-                        Edit
-                    </button>
-                    <button
-                        onClick={() => handleDelete(task.id)}
-                        className="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors transform hover:scale-105 w-full sm:w-auto"
-                    >
-                        Delete
-                    </button>
-                </div>
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    {tasks.map((task) => (
+        <div
+            key={task.id}
+            className={`bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-4 flex flex-col justify-between h-full ${task.status === 'completed' ? 'border-green-500' : 'border-blue-500'}`}
+        >
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-gray-900 hover:text-blue-600 transition-colors mb-3">{task.title}</h3>
+            <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-4">{task.description}</p>
+            <div className="mt-4 text-sm text-gray-600 space-y-2 flex-grow">
+                <p>Category: <span className="font-semibold text-gray-800">{task.category}</span></p>
+                <p>Due Date: <span className="font-semibold text-gray-800">{task.due_date}</span></p>
+                <p>Status: <span className="font-semibold text-gray-800">{task.status}</span></p>
             </div>
-        ))}
-    </div>
+            <div className="flex justify-between mt-4 space-x-3 space-y-2 sm:space-y-0">
+                <button
+                    onClick={() => openModal(task)}
+                    className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors transform hover:scale-105 w-full sm:w-auto"
+                >
+                    Edit
+                </button>
+                <button
+                    onClick={() => handleDelete(task.id)}
+                    className="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors transform hover:scale-105 w-full sm:w-auto"
+                >
+                    Delete
+                </button>
+            </div>
+        </div>
+    ))}
+</div>
 
 
 
