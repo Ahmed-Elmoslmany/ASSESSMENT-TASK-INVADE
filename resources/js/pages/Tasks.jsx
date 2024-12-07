@@ -32,7 +32,7 @@ const Tasks = () => {
         } catch (e) {
             console.log(e);
         }
-    }, [url])
+    }, [url, tasks])
 
     useEffect(() => {
         const token = localStorage.getItem('authToken');
@@ -127,7 +127,7 @@ const Tasks = () => {
                 </div>
 
 
-                <CreateTask />
+                <CreateTask tasks={tasks} setTasks={setTasks}/>
                 <TaskList tasks={tasks} />
             </div>
 
