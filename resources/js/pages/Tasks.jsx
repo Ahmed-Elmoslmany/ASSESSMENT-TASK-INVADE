@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Tasks = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [tasks, setTasks] = useState([]);
@@ -32,7 +34,7 @@ const Tasks = () => {
         } catch (e) {
             console.log(e);
         }
-    }, [url])
+    }, [url, tasks])
 
     useEffect(() => {
         const token = localStorage.getItem('authToken');
@@ -90,6 +92,18 @@ const Tasks = () => {
     return (
         <>
             <div className="container mx-auto px-4 py-6 max-w-full text-center mt-10 mb-10">
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={true}
+                closeOnClick
+                pauseOnHover
+                draggable={false}
+                theme="colored"
+                style={{ fontSize: '1rem', fontWeight: 'bold' }}
+               
+            />
+            
                 <h1 className="text-2xl font-bold mb-6 text-gray-800">{amount}</h1>
                 <div>
                     <label htmlFor="statusFilter" className="mr-2 font-semibold">Filter by Status:</label>
@@ -127,7 +141,7 @@ const Tasks = () => {
                 </div>
 
 
-                <CreateTask />
+                <CreateTask tasks={tasks} setTasks={setTasks}/>
                 <TaskList tasks={tasks} />
             </div>
 
