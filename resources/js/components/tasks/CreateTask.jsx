@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import Modal from '../Modal';  
+import { toast } from 'react-toastify';
+
+import Modal from '../Modal';
 
 const CreateTask = ({ tasks, setTasks }) => {
-    const [modalOpen, setModalOpen] = useState(false); 
+    const [modalOpen, setModalOpen] = useState(false);
     const [taskData, setTaskData] = useState({
         title: '',
         description: '',
@@ -37,31 +39,28 @@ const CreateTask = ({ tasks, setTasks }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(taskData);
-        try{
+        try {
             const response = await axios.post('http://localhost:8000/api/tasks', taskData, {
                 'headers': {
                     'Authorization': 'Bearer ' + localStorage.getItem('authToken'),
                     'Content-Type': 'application/json',
                 }
             });
-            if (response.status === 201) { 
+            if (response.status === 201) {
                 setTasks((tasks) => [
                     ...tasks,
                     { ...response.data, id: response.data.id || new Date().getTime() },
                 ]);
-                
-    
-                
+
+                toast.success('Task Created Successfully!', { autoClose: 2000 });
+
                 closeModal();
             }
         } catch (error) {
-            alert('Error creating task');
-            console.log(error);
-            
+            toast.error('Error Creating Task', { autoClose: 2000 });
+            closeModal();
         }
-        // Handle task creation logic here (e.g., make an API call to save the task)
-        console.log('Task Created:', taskData);
-        closeModal();  
+        
     };
 
     return (
@@ -75,7 +74,7 @@ const CreateTask = ({ tasks, setTasks }) => {
             </button>
 
             {modalOpen && (
-                <Modal 
+                <Modal
                     taskData={taskData}
                     handleSubmit={handleSubmit}
                     handleInputChange={handleInputChange}

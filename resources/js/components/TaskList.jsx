@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Modal from './Modal';
+import { toast } from 'react-toastify';
+
 const TaskList = ({ tasks, setTasks }) => {
     const [selectedTask, setSelectedTask] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
@@ -52,32 +54,38 @@ const TaskList = ({ tasks, setTasks }) => {
         e.preventDefault();
         console.log(taskData);
         try {
-            await axios.patch(`http://localhost:8000/api/tasks/${selectedTask.id}`, taskData, {
+            const response = await axios.patch(`http://localhost:8000/api/tasks/${selectedTask.id}`, taskData, {
                 'headers': {
                     'Authorization': 'Bearer ' + localStorage.getItem('authToken'),
                     'Content-Type': 'application/json',
                 }
             });
-            alert('Task updated successfully!');
-            closeModal();
+
+            if(response.status === 200) {
+                toast.success('Task Updated Successfully!', { autoClose: 2000 });
+
+                closeModal();
+            }
         } catch (error) {
-            alert('Error updating task');
+                toast.error('Error Updating Task!', { autoClose: 2000 });
+                closeModal();
         }
     };
 
     const handleDelete = async (taskId) => {
         try {
-            await axios.delete(`http://localhost:8000/api/tasks/${taskId}`, {
+            const response =await axios.delete(`http://localhost:8000/api/tasks/${taskId}`, {
                 'headers': {
                     'Authorization': 'Bearer ' + localStorage.getItem('authToken'),
                     'Content-Type': 'application/json',
                 }
             });
-            alert('Task deleted successfully!');
 
-            setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
+            if(response.status === 200) {
+                toast.success('Task Deleted Successfully!', { autoClose: 2000 });
+            }
         } catch (error) {
-            alert('Error deleting task');
+            toast.error('Error Deleting Task!', { autoClose: 2000 });
         }
     };
 
