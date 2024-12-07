@@ -73,4 +73,12 @@ class TaskController extends Controller
             'message' => 'Task has been restored',
         ], 200);
     }
+
+/*************  ✨ Codeium Command ⭐  *************/
+/******  793cd329-29de-43ca-8079-b07224618e9f  *******/
+    public function softDelete(){
+        $softDeletedTasks = auth()->user()->tasks()->onlyTrashed()->get();
+        
+        return TaskResource::collection($softDeletedTasks);
+    }
 }
