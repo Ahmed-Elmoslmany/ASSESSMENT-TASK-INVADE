@@ -59,7 +59,7 @@ const CreateTask = () => {
             
             <button
                 onClick={openModal}
-                className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors transform hover:scale-105 mb-6"
+                className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors transform hover:scale-105 mb-6 font-semibold"
             >
                 Create Task
             </button>
