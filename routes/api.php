@@ -5,6 +5,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AuthController;
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('tasks/soft-delete', [TaskController::class, 'softDelete']);
     Route::apiResource('tasks', TaskController::class);
     Route::apiResource('categories', CategoryController::class);
     Route::patch('tasks/restore/{id}', [TaskController::class, 'restore']);

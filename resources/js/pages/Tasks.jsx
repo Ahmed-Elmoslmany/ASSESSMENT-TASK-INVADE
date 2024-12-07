@@ -1,12 +1,12 @@
 import Authentication from "./Authentication"
-import TaskList from "../components/TaskList";
+import TaskList from "../components/tasks/TaskList";
 import CreateTask from "../components/tasks/CreateTask";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from "axios";
-import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import TaskHeader from "../components/tasks/TaskHeader";
 const Tasks = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [tasks, setTasks] = useState([]);
@@ -19,7 +19,6 @@ const Tasks = () => {
     useEffect(() => {
         try {
             axios.get(url, {
-
                 'headers': {
                     'Authorization': 'Bearer ' + localStorage.getItem('authToken'),
                     'Content-Type': 'application/json',
@@ -92,56 +91,22 @@ const Tasks = () => {
     return (
         <>
             <div className="container mx-auto px-4 py-6 max-w-full text-center mt-10 mb-10">
-            <ToastContainer
-                position="top-right"
-                autoClose={2000}
-                hideProgressBar={true}
-                closeOnClick
-                pauseOnHover
-                draggable={false}
-                theme="colored"
-                style={{ fontSize: '1rem', fontWeight: 'bold' }}
-               
-            />
-            
-                <h1 className="text-2xl font-bold mb-6 text-gray-800">{amount}</h1>
-                <div>
-                    <label htmlFor="statusFilter" className="mr-2 font-semibold">Filter by Status:</label>
-                    <select className="px-4 py-2 border border-gray-300 rounded-md" id="statusFilter" value={status} onChange={handleStatusChange}>
-                        <option value="">No Filter</option>
-                        <option value="pending">Pending</option>
-                        <option value="completed">Completed</option>
-                    </select>
-                </div>
-                <div className="flex justify-between items-center">
+                <ToastContainer
+                    position="top-right"
+                    autoClose={2000}
+                    hideProgressBar={true}
+                    closeOnClick
+                    pauseOnHover
+                    draggable={false}
+                    theme="colored"
+                    style={{ fontSize: '1rem', fontWeight: 'bold' }}
 
-                    {links.prev ? (
-                        <button
-                            onClick={handelPreviousPage}
-                            className="flex justify-center px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors transform hover:scale-105 mb-6 font-semibold"
-                        >
-                            <ArrowLeftIcon className="h-5 w-5 mr-2 mt-0.5" />
-                            Previous
-                        </button>
-                    ) : (
-                        <div className="w-[100px]"></div>
-                    )}
+                />
 
-                    {links.next ? (
-                        <button
-                            onClick={handelNextPage}
-                            className="flex justify-center px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors transform hover:scale-105 mb-6 font-semibold"
-                        >
-                            Next
-                            <ArrowRightIcon className="h-5 w-5 ml-2 mt-0.5" />
-                        </button>
-                    ) : (
-                        <div className="w-[100px]"></div>
-                    )}
-                </div>
+                <TaskHeader amount={amount} links={links} status={status} handleStatusChange={handleStatusChange} handelPreviousPage={handelPreviousPage} handelNextPage={handelNextPage} />
 
 
-                <CreateTask tasks={tasks} setTasks={setTasks}/>
+                <CreateTask tasks={tasks} setTasks={setTasks} />
                 <TaskList tasks={tasks} />
             </div>
 
