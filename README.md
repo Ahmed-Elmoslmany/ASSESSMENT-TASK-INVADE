@@ -5,7 +5,7 @@
 # Invadems Assessment Task
 
 <h2 align="center">Tools</h2>
-- [Laravel](https://laravel.com) • [Sanctum](https://laravel.com) • [React](https://react.dev/) • [Tailwind CSS](https://tailwindcss.com/)
+- Laravel, Sanctum, React and Tailwind CSS
 
 ## How to test this project using your local machine, follow me up.
 
