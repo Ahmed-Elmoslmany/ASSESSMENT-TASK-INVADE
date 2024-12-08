@@ -1,13 +1,10 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="http://www.invadems.com/storage/zLGzberJHau0XUt4ZRYZCE2l060tvVSz4aWqQOxz.png" width="400"></a></p>
 
+<h1 align="center">Invadems Assessment Task</h1>
 
+**Tools**: Laravel, Sanctum, React and Tailwind CSS
 
-# Invadems Assessment Task
-
-<h2 align="center">Tools</h2>
-- Laravel, Sanctum, React and Tailwind CSS
-
-## How to test this project using your local machine, follow me up.
+## Setup instructions
 
 - First of all, make sure these tools are installed: `git`, `composer`, `node` and `php-82`.
 - Clone this repo `git clone https://github.com/Ahmed-Elmoslmany/ASSESSMENT-TASK-INVADE.git`.
