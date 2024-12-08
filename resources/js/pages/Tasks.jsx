@@ -7,6 +7,7 @@ import axios from "axios";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import TaskHeader from "../components/tasks/TaskHeader";
+import IconButtons from "../components/IconButtons";
 const Tasks = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [tasks, setTasks] = useState([]);
@@ -28,7 +29,7 @@ const Tasks = () => {
             }).then(res => {
                 setTasks(res.data.data);
                 setLinks(res.data.links);
-                setAmount(`Show ${res.data.meta.to} tasks from ${res.data.meta.total}`);
+                setAmount(`Show ${res.data.meta.to ? res.data.meta.to : 0} tasks from ${res.data.meta.total}`);
             })
         } catch (e) {
             console.log(e);
@@ -90,6 +91,7 @@ const Tasks = () => {
     }
     return (
         <>
+        <IconButtons />
             <div className="container mx-auto px-4 py-6 max-w-full text-center mt-10 mb-10">
                 <ToastContainer
                     position="top-right"

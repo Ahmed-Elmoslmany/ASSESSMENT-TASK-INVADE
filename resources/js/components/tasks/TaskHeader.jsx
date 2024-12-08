@@ -2,7 +2,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 
 const TaskHeader = ({amount, links, status, handleStatusChange, handelPreviousPage, handelNextPage}) => {
     return (
-        <>
+        <div className='flex flex-col'>
             <h1 className="text-2xl font-bold mb-6 text-gray-800">{amount}</h1>
             <div>
                 <label htmlFor="statusFilter" className="mr-2 font-semibold">Filter by Status:</label>
@@ -38,7 +38,7 @@ const TaskHeader = ({amount, links, status, handleStatusChange, handelPreviousPa
                     <div className="w-[100px]"></div>
                 )}
             </div>
-        </>
+        </div>
     )
 }
 
