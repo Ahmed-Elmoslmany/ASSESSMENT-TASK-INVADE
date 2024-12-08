@@ -13,7 +13,7 @@ class TaskController extends Controller
 {
     public function __construct(protected TaskService $taskService){}
 
-    public function index(Request $request)
+    public function index(Request $request) 
     {
         $status = $request->query('status');
 
@@ -74,10 +74,9 @@ class TaskController extends Controller
         ], 200);
     }
 
-/*************  ✨ Codeium Command ⭐  *************/
-/******  793cd329-29de-43ca-8079-b07224618e9f  *******/
     public function softDelete(Request $request){
-        $trashQeury = auth()->user()->tasks()->onlyTrashed();
+        $trashQeury = auth()->user()->tasks()->latest()->onlyTrashed();
+        
         $status = $request->query('status');
 
         if($status){

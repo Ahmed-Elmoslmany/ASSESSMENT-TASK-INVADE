@@ -44,7 +44,7 @@ const Trash = () => {
             }).then(res => {
                 setTasks(res.data.data);
                 setLinks(res.data.links);
-                setAmount(`Show ${res.data.meta.to} tasks from ${res.data.meta.total}`);
+                setAmount(`Show ${res.data.meta.to ? res.data.meta.to : 0} tasks from ${res.data.meta.total}`);
             })
         } catch (e) {
             toast.error('Error Fetching Tasks!', { autoClose: 2000 });
@@ -95,21 +95,19 @@ const Trash = () => {
                 pauseOnHover
                 draggable={false}
                 theme="colored"
-                style={{ fontSize: '1rem', fontWeight: 'bold' }}
+                style={{ fontSize: '1rem', fontWeight: 'bold' }}/>
 
-            />
             <div className="container mx-auto px-4 py-6 max-w-full text-center mt-10 mb-10">
-
-                    <TaskHeader
-                        amount={amount}
-                        links={links}
-                        status={status}
-                        handleStatusChange={handleStatusChange}
-                        handelPreviousPage={handelPreviousPage}
-                        handelNextPage={handelNextPage}
-                    />
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6 center">
-                    {tasks.map((task) => (
+                <TaskHeader
+                    amount={amount}
+                    links={links}
+                    status={status}
+                    handleStatusChange={handleStatusChange}
+                    handelPreviousPage={handelPreviousPage}
+                    handelNextPage={handelNextPage}
+                />
+                {tasks.length ? <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6 center">
+                   {tasks.map((task) => (
                         <div className='group relative bg-gray-100 rounded-md p-4 opacity-50 hover:opacity-100 hover:bg-gray-200' key={task.id}>
                             <TaskContainer task={task} key={task.id}>
                                 <TaskBody task={task} key={task.id} />
@@ -120,8 +118,7 @@ const Trash = () => {
                             </button>
                         </div>
                     ))}
-                </div>
-
+                </div> : <h1 className='text-2xl font-bold text-gray-800 mt-5'>No Trashed Tasks Found!</h1>}
             </div>
         </>
 

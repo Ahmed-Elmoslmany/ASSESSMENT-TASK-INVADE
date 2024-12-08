@@ -17,9 +17,9 @@ const CreateTask = ({ tasks, setTasks }) => {
         setTaskData({
             title: '',
             description: '',
-            status: '',
+            status: 'pending',
             category_id: 1,
-            due_date: '',
+            due_date: '2024-12-09',
         });
         setModalOpen(true);
     };

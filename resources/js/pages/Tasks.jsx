@@ -28,7 +28,7 @@ const Tasks = () => {
             }).then(res => {
                 setTasks(res.data.data);
                 setLinks(res.data.links);
-                setAmount(`Show ${res.data.meta.to} tasks from ${res.data.meta.total}`);
+                setAmount(`Show ${res.data.meta.to ? res.data.meta.to : 0} tasks from ${res.data.meta.total}`);
             })
         } catch (e) {
             console.log(e);
