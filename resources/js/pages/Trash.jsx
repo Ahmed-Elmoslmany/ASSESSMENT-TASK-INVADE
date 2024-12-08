@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import TaskContainer from '../components/tasks/TaskContainer';
 import TaskBody from '../components/tasks/TaskBody';
+import TaskHeader from '../components/tasks/TaskHeader';
 import Task from '../components/tasks/Task';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
@@ -11,6 +12,10 @@ const Trash = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const navigate = useNavigate();
     const [tasks, setTasks] = useState([]);
+    const [links, setLinks] = useState([]);
+    const [url, setUrl] = useState('http://localhost:8000/api/tasks/soft-delete');
+    const [amount, setAmount] = useState('');
+    const [status, setStatus] = useState('');
 
     const handleRestoreTask = async (taskId) => {
         try {
@@ -31,13 +36,15 @@ const Trash = () => {
 
     useEffect(() => {
         try {
-            axios.get('http://localhost:8000/api/tasks/soft-delete', {
+            axios.get(url, {
                 'headers': {
                     'Authorization': 'Bearer ' + localStorage.getItem('authToken'),
                     'Content-Type': 'application/json',
                 },
             }).then(res => {
                 setTasks(res.data.data);
+                setLinks(res.data.links);
+                setAmount(`Show ${res.data.meta.to} tasks from ${res.data.meta.total}`);
             })
         } catch (e) {
             toast.error('Error Fetching Tasks!', { autoClose: 2000 });
@@ -54,6 +61,30 @@ const Trash = () => {
         }
     }, [navigate]);
 
+    const handleStatusChange = (e) => {
+        const selectedStatus = e.target.value;
+        setStatus(selectedStatus);
+
+        const baseUrl = 'http://localhost:8000/api/tasks/soft-delete';
+        const newUrl = selectedStatus ? `${baseUrl}?status=${selectedStatus}` : baseUrl;
+        setUrl(newUrl);
+    };
+
+    const handelNextPage = () => {
+        if (links.next) {
+            const urlWithStatus = status ? `${links.next}&status=${status}` : links.next;
+            setUrl(urlWithStatus);
+        }
+    }
+
+    const handelPreviousPage = () => {
+        if (links.prev) {
+            const urlWithStatus = status ? `${links.prev}&status=${status}` : links.prev;
+            setUrl(urlWithStatus);
+        }
+    };
+
+
     return (
         <>
             <ToastContainer
@@ -67,7 +98,16 @@ const Trash = () => {
                 style={{ fontSize: '1rem', fontWeight: 'bold' }}
 
             />
-            <div className="p-6 align-center">
+            <div className="container mx-auto px-4 py-6 max-w-full text-center mt-10 mb-10">
+
+                    <TaskHeader
+                        amount={amount}
+                        links={links}
+                        status={status}
+                        handleStatusChange={handleStatusChange}
+                        handelPreviousPage={handelPreviousPage}
+                        handelNextPage={handelNextPage}
+                    />
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6 center">
                     {tasks.map((task) => (
                         <div className='group relative bg-gray-100 rounded-md p-4 opacity-50 hover:opacity-100 hover:bg-gray-200' key={task.id}>

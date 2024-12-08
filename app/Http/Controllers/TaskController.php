@@ -76,9 +76,16 @@ class TaskController extends Controller
 
 /*************  ✨ Codeium Command ⭐  *************/
 /******  793cd329-29de-43ca-8079-b07224618e9f  *******/
-    public function softDelete(){
-        $softDeletedTasks = auth()->user()->tasks()->onlyTrashed()->get();
+    public function softDelete(Request $request){
+        $trashQeury = auth()->user()->tasks()->onlyTrashed();
+        $status = $request->query('status');
+
+        if($status){
+            $trashQeury->where('status', $status);
+        }
         
+        $softDeletedTasks = $trashQeury->paginate(10);
+
         return TaskResource::collection($softDeletedTasks);
     }
 }
