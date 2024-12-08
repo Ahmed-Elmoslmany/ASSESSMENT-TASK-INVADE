@@ -11,7 +11,10 @@
 ## How to test this project using your local machine, follow me up.
 
 - First of all, clone this repo
-- Then run `composer install` and `npm install`
+- Then run this command `composer install` and `npm install`
+- Copy values from `.env.example` file then create `.env` and paste copied values
+- Setup database (I prefere MySql but you could choose any)
+- Run this command `php artisan key:generate` to generate `APP_KEY`
 - Then run the migration with this command `php artisan migrate --seed`
 - Then open the browser and hit http://localhost:8000/ you'll navigate automatically to http://localhost:8000/login because you are not signed in
 - So lets login using these credentials that created using `--seed` flag when run the migration
