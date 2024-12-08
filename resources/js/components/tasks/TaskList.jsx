@@ -51,9 +51,8 @@ const TaskList = ({ tasks, setTasks }) => {
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleUpdate = async (e) => {
         e.preventDefault();
-        console.log(taskData);
         try {
             const response = await axios.patch(`http://localhost:8000/api/tasks/${selectedTask.id}`, taskData, {
                 'headers': {
@@ -63,12 +62,14 @@ const TaskList = ({ tasks, setTasks }) => {
             });
 
             if (response.status === 200) {
+                const updatedTask = response.data.data;
                 toast.success('Task Updated Successfully!', { autoClose: 2000 });
-
+                setTasks((oldTasks) => oldTasks.map((task) => task.id === updatedTask.id ? updatedTask : task))
                 closeModal();
             }
         } catch (error) {
             toast.error('Error Updating Task!', { autoClose: 2000 });
+            console.error(error)
             closeModal();
         }
     };
@@ -83,10 +84,13 @@ const TaskList = ({ tasks, setTasks }) => {
             });
 
             if (response.status === 200) {
+                setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+
                 toast.success('Task Deleted Successfully!', { autoClose: 2000 });
             }
         } catch (error) {
             toast.error('Error Deleting Task!', { autoClose: 2000 });
+            console.log(error);
         }
     };
 
@@ -101,7 +105,7 @@ const TaskList = ({ tasks, setTasks }) => {
             {modalOpen && (
                 <Modal
                     taskData={taskData}
-                    handleSubmit={handleSubmit}
+                    handleSubmit={handleUpdate}
                     handleInputChange={handleInputChange}
                     closeModal={closeModal}
                 />

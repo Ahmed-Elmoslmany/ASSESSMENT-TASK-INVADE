@@ -19,7 +19,6 @@ const Trash = () => {
 
     const handleRestoreTask = async (taskId) => {
         try {
-            console.log(localStorage.getItem('authToken'));
             const response = await axios.patch(`http://localhost:8000/api/tasks/restore/${taskId}`, null, {
                 'headers': {
                     'Authorization': 'Bearer ' + localStorage.getItem('authToken'),
@@ -28,6 +27,7 @@ const Trash = () => {
             });
             if (response.status === 200) {
                 toast.success('Task Restored Successfully!', { autoClose: 2000 });
+                setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
             }
         } catch (error) {
             toast.error('Error Restoring Task!', { autoClose: 2000 });
@@ -49,7 +49,16 @@ const Trash = () => {
         } catch (e) {
             toast.error('Error Fetching Tasks!', { autoClose: 2000 });
         }
-    }, [tasks])
+    }, [url])
+
+    const handleStatusChange = (e) => {
+        const selectedStatus = e.target.value;
+        setStatus(selectedStatus);
+
+        const baseUrl = 'http://localhost:8000/api/tasks/trashed';
+        const newUrl = selectedStatus ? `${baseUrl}?status=${selectedStatus}` : baseUrl;
+        setUrl(newUrl);
+    };
 
 
     useEffect(() => {
@@ -61,15 +70,7 @@ const Trash = () => {
         }
     }, [navigate]);
 
-    const handleStatusChange = (e) => {
-        const selectedStatus = e.target.value;
-        setStatus(selectedStatus);
-
-        const baseUrl = 'http://localhost:8000/api/tasks/trashed';
-        const newUrl = selectedStatus ? `${baseUrl}?status=${selectedStatus}` : baseUrl;
-        setUrl(newUrl);
-    };
-
+    
     const handelNextPage = () => {
         if (links.next) {
             const urlWithStatus = status ? `${links.next}&status=${status}` : links.next;
@@ -108,7 +109,7 @@ const Trash = () => {
                 />
                 {tasks.length ? <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6 center">
                    {tasks.map((task) => (
-                        <div className='group relative bg-gray-100 rounded-md p-4 opacity-50 hover:opacity-100 hover:bg-gray-200' key={task.id}>
+                        <div className='group relative bg-gray-100 rounded-md p-4 opacity-50 hover:opacity-100 hover:bg-gray-200' id={`taskContainer${task.id}`} key={task.id}>
                             <TaskContainer task={task} key={task.id}>
                                 <TaskBody task={task} key={task.id} />
                             </TaskContainer>
