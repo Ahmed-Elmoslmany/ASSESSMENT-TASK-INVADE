@@ -1,42 +1,29 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="http://www.invadems.com/storage/zLGzberJHau0XUt4ZRYZCE2l060tvVSz4aWqQOxz.png" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="http://www.invadems.com/storage/zLGzberJHau0XUt4ZRYZCE2l060tvVSz4aWqQOxz.png" width="400"></a></p>
 
 
 
 # Invadems Assessment Task
-## This repo is assessment Task 
 
 <h2 align="center">Tools</h2>
-- [Laravel](https://laravel.com/) • [React](https://react.dev/) • [Tailwind CSS](https://tailwindcss.com/)
+- [Laravel](https://laravel.com) • [Sanctum](https://laravel.com) • [React](https://react.dev/) • [Tailwind CSS](https://tailwindcss.com/)
 
 ## How to test this project using your local machine, follow me up.
 
-- First of all, clone this repo
-- Then run this command `composer install` and `npm install`
-- Copy values from `.env.example` file then create `.env` and paste copied values
-- Setup database (I prefere MySql but you could choose any)
-- Run this command `php artisan key:generate` to generate `APP_KEY`
-- Then run the migration with this command `php artisan migrate --seed`
-- Then open the browser and hit http://localhost:8000/ you'll navigate automatically to http://localhost:8000/login because you are not signed in
-- So lets login using these credentials that created using `--seed` flag when run the migration
-- Use this email `a.elmoslmany@invadems.com` and this password `password` then **login**
-- Hooray🥳 You are now authenticated user
-- You could create, edit, delete (soft delete) tasks, Also you could filter tasks by status and using pagination to see all tasks
+- First of all, make sure these tools are installed: `git`, `composer`, `node` and `php-82`.
+- Clone this repo `git clone https://github.com/Ahmed-Elmoslmany/ASSESSMENT-TASK-INVADE.git`.
+- Copy the `.env.example` file and name it `.env`.
+- Then run this `composer install && npm install && php artisan key:generate && php artisan migrate --seed`.
+- Then run `php artisan serve` and `npm run dev` in two seperate terminals.
+- Then open the browser and hit http://localhost:8000/ you will automatically get redirected to http://localhost:8000/login because you are not signed in yet.
+- Click login button with default values.
+- Hooray🥳 You are now authenticated and will be redirected to the todos.
+- You now can create, edit, delete (soft delete) tasks, Also you can see paginated tasks with filteration.
 - Also you could see your trashed tasks and restore them safely.
 
 
 ### Steps supported by images
 <h3 align="center">Login</h3>
-![Screenshot from 2024-12-08 07-57-52](https://github.com/user-attachments/assets/72e9eda9-5716-4630-a956-7f0ea933c031)
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://github.com/user-attachments/assets/72e9eda9-5716-4630-a956-7f0ea933c031" width="400"></a></p>
 
-<h3 align="center">Main Page</h3>
- ![Screenshot from 2024-12-08 07-58-59](https://github.com/user-attachments/assets/f36c2c47-e360-4dd6-b732-c94dfce04fcd)
-
-<h3 align="center">Tasks</h3>
-![Screenshot from 2024-12-08 08-02-00](https://github.com/user-attachments/assets/45f29ea0-3a5b-49bf-832a-24a0f82a6a19)
-
-### Feel free to explore the filter and pagination and also trash, You'll also notice the toast at top-right
-<h3 align="center">Toast</h3>
-![Screenshot from 2024-12-08 08-06-37](https://github.com/user-attachments/assets/ffb8204a-edb1-4006-89b4-dbae58d27e30)
-
-
+#### Feel free to explore the filter and pagination and also trash, You'll also notice the toast at top-right
 
