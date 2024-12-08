@@ -13,7 +13,7 @@ const Trash = () => {
     const navigate = useNavigate();
     const [tasks, setTasks] = useState([]);
     const [links, setLinks] = useState([]);
-    const [url, setUrl] = useState('http://localhost:8000/api/tasks/soft-delete');
+    const [url, setUrl] = useState('http://localhost:8000/api/tasks/trashed');
     const [amount, setAmount] = useState('');
     const [status, setStatus] = useState('');
 
@@ -65,7 +65,7 @@ const Trash = () => {
         const selectedStatus = e.target.value;
         setStatus(selectedStatus);
 
-        const baseUrl = 'http://localhost:8000/api/tasks/soft-delete';
+        const baseUrl = 'http://localhost:8000/api/tasks/trashed';
         const newUrl = selectedStatus ? `${baseUrl}?status=${selectedStatus}` : baseUrl;
         setUrl(newUrl);
     };
