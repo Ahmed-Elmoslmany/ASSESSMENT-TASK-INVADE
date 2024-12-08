@@ -23,7 +23,7 @@ const Modal = ({ taskData, handleSubmit, handleInputChange, closeModal }) => {
                             name="title"
                             value={taskData.title}
                             onChange={handleInputChange}
-                            className="w-full p-2 border border-gray-300 rounded-md"
+                            className="w-full p-2 border border-gray-300 rounded-md text-black"
                         />
                     </div>
                     <div className="mb-4">
@@ -32,7 +32,7 @@ const Modal = ({ taskData, handleSubmit, handleInputChange, closeModal }) => {
                             name="description"
                             value={taskData.description}
                             onChange={handleInputChange}
-                            className="w-full p-2 border border-gray-300 rounded-md"
+                            className="w-full p-2 border border-gray-300 rounded-md text-black"
                         />
                     </div>
                     <div className="mb-4">
@@ -41,7 +41,7 @@ const Modal = ({ taskData, handleSubmit, handleInputChange, closeModal }) => {
                             name="status"
                             value={taskData.status}
                             onChange={handleInputChange}
-                            className="w-full p-2 border border-gray-300 rounded-md"
+                            className="w-full p-2 border border-gray-300 rounded-md text-black"
                         >
                             <option value="pending">Pending</option>
                             <option value="completed">Completed</option>
@@ -54,7 +54,7 @@ const Modal = ({ taskData, handleSubmit, handleInputChange, closeModal }) => {
                             name="category_id"
                             value={taskData.category_id}
                             onChange={handleInputChange}
-                            className="w-full p-2 border border-gray-300 rounded-md"
+                            className="w-full p-2 border border-gray-300 rounded-md text-black"
                         >
                             <option value={1}>Personal</option>
                             <option value={2}>Work</option>
@@ -68,7 +68,7 @@ const Modal = ({ taskData, handleSubmit, handleInputChange, closeModal }) => {
                             name="due_date"
                             value={taskData.due_date}
                             onChange={handleInputChange}
-                            className="w-full p-2 border border-gray-300 rounded-md"
+                            className="w-full p-2 border border-gray-300 rounded-md text-black"
                         />
                     </div>
                     <div className="flex justify-between">

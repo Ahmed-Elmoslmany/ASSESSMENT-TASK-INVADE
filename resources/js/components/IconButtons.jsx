@@ -9,7 +9,7 @@ const IconButtons = () => {
     };
 
     return (
-        <div className="flex justify-between items-center w-full px-4">
+        <div className="flex justify-between items-center w-full px-4 bg-white">
             <button onClick={() => handleLogout()} className="flex items-center justify-center p-2 text-blue-500 hover:text-blue-700">
                 <ArrowLeftOnRectangleIcon className="h-6 w-6" />
                 Logout

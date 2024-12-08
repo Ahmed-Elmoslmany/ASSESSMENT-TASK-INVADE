@@ -24,7 +24,7 @@ const Register = ({error, setRegisterUsername, setRegisterEmail, setRegisterPass
                 required
                 value={registerUsername}
                 onChange={(e) => setRegisterUsername(e.target.value)}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="block w-full text-black px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Username"
               />
             </div>
@@ -35,7 +35,7 @@ const Register = ({error, setRegisterUsername, setRegisterEmail, setRegisterPass
                 required
                 value={registerEmail}
                 onChange={(e) => setRegisterEmail(e.target.value)}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="block w-full px-3 text-black py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Email address"
               />
             </div>
@@ -46,7 +46,7 @@ const Register = ({error, setRegisterUsername, setRegisterEmail, setRegisterPass
                 required
                 value={registerPassword}
                 onChange={(e) => setRegisterPassword(e.target.value)}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="block text-black w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Password"
               />
             </div>
@@ -57,7 +57,7 @@ const Register = ({error, setRegisterUsername, setRegisterEmail, setRegisterPass
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="block text-black w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Confirm Password"
               />
             </div>

@@ -2,11 +2,11 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 
 const TaskHeader = ({amount, links, status, handleStatusChange, handelPreviousPage, handelNextPage}) => {
     return (
-        <div className='flex flex-col'>
+        <div className='flex flex-col bg-white'>
             <h1 className="text-2xl font-bold mb-6 text-gray-800">{amount}</h1>
             <div>
-                <label htmlFor="statusFilter" className="mr-2 font-semibold">Filter by Status:</label>
-                <select className="px-4 py-2 border border-gray-300 rounded-md" id="statusFilter" value={status} onChange={handleStatusChange}>
+                <label htmlFor="statusFilter" className="mr-2 font-semibold text-black">Filter by Status:</label>
+                <select className="px-4 py-2 border border-gray-300 rounded-md text-black" id="statusFilter" value={status} onChange={handleStatusChange}>
                     <option value="">No Filter</option>
                     <option value="pending">Pending</option>
                     <option value="completed">Completed</option>

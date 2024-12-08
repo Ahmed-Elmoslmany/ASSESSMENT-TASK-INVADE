@@ -97,7 +97,7 @@ const Trash = () => {
                 theme="colored"
                 style={{ fontSize: '1rem', fontWeight: 'bold' }}/>
 
-            <div className="container mx-auto px-4 py-6 max-w-full text-center mt-10 mb-10">
+            <div className="container mx-auto px-4 py-6 max-w-full text-center mt-10 mb-10 bg-white h-full">
                 <TaskHeader
                     amount={amount}
                     links={links}
@@ -118,7 +118,7 @@ const Trash = () => {
                             </button>
                         </div>
                     ))}
-                </div> : <h1 className='text-2xl font-bold text-gray-800 mt-5'>No Trashed Tasks Found!</h1>}
+                </div> : <h1 className='text-2xl font-bold text-gray-800 mt-5 bg-white h-full'>No Trashed Tasks Found!</h1>}
             </div>
         </>
 

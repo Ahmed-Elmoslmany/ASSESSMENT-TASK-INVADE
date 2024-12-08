@@ -92,7 +92,7 @@ const Tasks = () => {
     return (
         <>
         <IconButtons />
-            <div className="container mx-auto px-4 py-6 max-w-full text-center mt-10 mb-10">
+            <div className="container mx-auto px-4 py-6 max-w-full text-center mt-10 mb-10 bg-white">
                 <ToastContainer
                     position="top-right"
                     autoClose={2000}

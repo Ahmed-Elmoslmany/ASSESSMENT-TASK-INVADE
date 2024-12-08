@@ -64,7 +64,7 @@ const CreateTask = ({ tasks, setTasks }) => {
     };
 
     return (
-        <div className="p-6">
+        <div className="p-6 bg-white">
             
             <button
                 onClick={openModal}
