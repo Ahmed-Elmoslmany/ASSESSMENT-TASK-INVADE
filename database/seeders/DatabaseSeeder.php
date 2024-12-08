@@ -19,9 +19,10 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         User::factory()->create([
             'name' => 'Ahmed Elmoslmany',
-            'email' => 'a.elmoslmany@invade.com',
+            'email' => 'a.elmoslmany@invadems.com',
             'password' => bcrypt('password'),
         ]);
+        
         foreach (['Personal', 'Work', 'Urgent'] as $categoryName) {
             DB::table('categories')->insert([
                 'name' => $categoryName,
@@ -30,6 +31,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        Task::factory(21)->create();
+        Task::factory(200)->create();
     }
 }
