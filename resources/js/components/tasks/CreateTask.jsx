@@ -38,7 +38,6 @@ const CreateTask = ({ tasks, setTasks }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(taskData);
         try {
             const response = await axios.post('http://localhost:8000/api/tasks', taskData, {
                 'headers': {
@@ -46,14 +45,13 @@ const CreateTask = ({ tasks, setTasks }) => {
                     'Content-Type': 'application/json',
                 }
             });
+            
             if (response.status === 201) {
-                setTasks((tasks) => [
-                    ...tasks,
-                    { ...response.data, id: response.data.id || new Date().getTime() },
+                setTasks((oldTasks) => [
+                    response.data.data,
+                    ...oldTasks,
                 ]);
-
                 toast.success('Task Created Successfully!', { autoClose: 2000 });
-
                 closeModal();
             }
         } catch (error) {
